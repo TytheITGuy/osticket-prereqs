@@ -25,137 +25,138 @@ Project consists of setting up all the prerequisites and installing osTicket fro
 <h2>Project Walk-through:</h2>
 
 <p align="center">
-Navigate to Microsoft Azure and create a resource group: <br/>
-<img src="https://imgur.com/Hq1tcrY.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-<img src="https://i.imgur.com/WDCHbEa.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Once my resource group is created, next I'll create the virtual machine:  <br/>
-<img src="https://i.imgur.com/agXJt2C.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Setting up the virtual machine:  <br/>
-<img src="https://i.imgur.com/NliPCEk.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-<img src="https://imgur.com/QvyoJhd.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-I'll leave all other settings to default and create this VM. Once it has been created I'll use Remote Desktop Connection to connect to the VM:  <br/>
-<img src="https://imgur.com/E9lD900.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Once I've connected to the VM I will install and enable IIS (Internet Information Servies) by going to Control Panel> Programs> Turn Windows Features On or Off> Internet Information Services and enable it then World Wide Web Services> Application Development Features and enable CGI:  <br/>
-<img src="https://imgur.com/0MyNsKC.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Then go to Common HTTP Features dropdown and enable all features. Then apply the changes:  <br/>
-<img src="https://imgur.com/6Y6VzZH.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-I can test that the web server installed correctly by typing in the loopback IP (127.0.0.1) in the internet browser and this page should load:  <br/>
-<img src="https://imgur.com/XdKGpGl.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Now I need to install PHP manager for IIS Setup:  <br/>
-<img src="https://imgur.com/RuAUGw1.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Install IIS URL Rewrite Module:  <br/>
-<img src="https://imgur.com/465p9DH.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Once those have installed I will create a PHP directory on the C drive:  <br/>
-<img src="https://imgur.com/CEsoJp6.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Now I'll download PHP and extract the zip file in the PHP directory I just made:  <br/>
-<img src="https://imgur.com/LoYw0cZ.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Download Microsoft Visual C++:  <br/>
-<img src="https://imgur.com/SocF97p.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Download MySQL:  <br/>
-<img src="https://imgur.com/dFdQagT.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Next, I have to setup the login credentials and I'll write them down just so I remember, since this is only a project. Do not write passwords down in real life:  <br/>
-<img src="https://imgur.com/SeJVW6M.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Open IIS as an admin:  <br/>
-<img src="https://imgur.com/gFmrka6.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Next go to PHP Manager> Register new PHP version and then select the file shown:  <br/>
-<img src="https://imgur.com/nlD4F1L.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Go back to osticketVM Home and hit Restart under Manage Server on the right side:  <br/>
-<img src="https://imgur.com/F83Qw2a.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Next I'll download osTicket and copy the upload file to the wwwroot file in the inetpub directory:  <br/>
-<img src="https://imgur.com/op4Cs2g.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Rename upload file to osTicket:  <br/>
-<img src="https://imgur.com/ZBLsJsB.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Reload IIS and restart the server as I did before, then click Browse *80 (http) on the right side:  <br/>
-<img src="https://imgur.com/JnqQOJD.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-This page should open:  <br/>
-<img src="https://imgur.com/J4E020x.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Notice some extensions are not enabled. I'll enable a few of those in IIS. Go to Sites> Default Web Site> osTicket Click PHP Manager> Enable or disable an extension. Enable php_imap.dll, php_intl.dll, and php_opcache.dll:  <br/>
-<img src="https://imgur.com/ZJCdcDV.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Note the changes here:  <br/>
-<img src="https://imgur.com/yZbaGml.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Next browse in file explorer to C drive> osTicket> include> ost-sampleconfig.php and remove the "sample" from the name:  <br/>
-<img src="https://imgur.com/k6cfJaY.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Right-click on ost-config.php> Properties> Security> Advanced> Disable Inheritance> Remove all inherited permissions from this object:  <br/>
-<img src="https://imgur.com/G154DIx.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Click on the add buton to add permissions to the file> Select a principle> type "everyone"> Check> OK> check all permissions> OK> apply> OK:  <br/>
-<img src="https://imgur.com/clvmCHq.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Hit continue on the osTicket web page in the browser and fill out the set up page:  <br/>
-<img src="https://imgur.com/dYLO5Ot.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Before database set up we'll have to connect the database using HeidiSQL. Install HeidiSQL from setup links:  <br/>
-<img src="https://imgur.com/tyyovzJ.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-In HeidiSQL click New> Username = root> Password = mySQL password from mySQL setup> Open:  <br/>
-<img src="https://imgur.com/xoW0TMX.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-In HeidiSQL right click Unnamed> Create> New Database> Name it osTicket> OK. Then continue to fill out the database portion of osTicket setup. Click Install Now when done.:  <br/>
-<img src="https://imgur.com/w4VpziO.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Last steps, for clean up go to C drive> inetpub> wwwroot> osTicket and look for the setup file and delete it. Then go to C drive> inetpub> wwwroot> osTicket> include right click on ost-config.php> Properties> Security> Advanced> Select Everyone and click edit> only leave Read & Execute and Read checked, then apply settings:  <br/>
-<img src="https://imgur.com/o4GB231.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
+Navigate to Microsoft Azure and create a virtual machine and a new resource group: 
+
+![01-Creating a VM and Resource Group](https://github.com/user-attachments/assets/6f52402e-e6cf-439c-b99d-dd140e18f522)
+
+<p align="center">
+Be sure to pick the correct windows image type
+
+![02-Picking the image Type](https://github.com/user-attachments/assets/4aaecebc-9869-45ba-a15f-1db72cc12cde)
+
+<p align="center">
+Now Deployment is in progress
+
+![03-Deployment in progress](https://github.com/user-attachments/assets/cd08245f-c4b7-4deb-8768-14ec61260898)
+
+<p align="center">
+Once it has been created I'll use Remote Desktop Connection to connect to the VM: 
+
+![04-Connecting with Remote Desktop](https://github.com/user-attachments/assets/8a8fa616-db6d-46f1-835c-371f62c5e28c)
+
+<p align="center">
+Once I've connected to the VM I will install and enable IIS (Internet Information Servies) 
+
+![05-Internet Information Services](https://github.com/user-attachments/assets/b1979dbb-88b3-40c8-8a46-6079cd177a0b)
+
+
+<p align="center">
+DO NOT FORGET to turn on CGI: 
+
+![06-CGI](https://github.com/user-attachments/assets/c8b5023a-bf51-4503-b842-723f5c412db2)
+
+<p align="center">
+I can test that the web server installed correctly by typing in the loopback IP (127.0.0.1) in the internet browser and this page should load:  
+
+![07-Loopback Address](https://github.com/user-attachments/assets/2911670f-77c8-43ae-8137-cfa5c85b913e)
+
+<p align="center">
+Now I need to install PHP manager for IIS Setup:  
+
+![08-PHP Manager](https://github.com/user-attachments/assets/96a8a03c-1b66-4af0-ae1d-c59169e95a60)
+
+<p align="center">
+Install IIS URL Rewrite Module:  
+
+![09-Rewrite Module](https://github.com/user-attachments/assets/c653f688-7efe-42be-b356-7bf073990679)
+
+<p align="center">
+Once those have installed I will create a PHP directory on the C drive:  
+
+![10-PHP Folder](https://github.com/user-attachments/assets/d0b393e2-e685-48c2-a837-a1a804673409)
+
+<p align="center">
+Download Microsoft Visual C++: 
+
+![11-Installing C++](https://github.com/user-attachments/assets/92c11b3b-deac-40ac-a167-e15ee2ce1566)
+
+
+<p align="center">
+Download MySQL:  
   
+![12-Installing My SQL](https://github.com/user-attachments/assets/45d8ef33-fbba-4900-b1b4-016e6bf91a41)
+
+
+<p align="center">
+Next, I have to setup the login credentials and I'll write them down just so I remember, since this is only a project. Do not write passwords down in real life:  <br/>
+<img src="https://imgur.com/SeJVW6M.png" height="100%" width="100%" alt="Setting Up in Azure"/>
+<br />
+<br />
+
+<p align="center">
+Open IIS as an admin:  
+
+![14-opening up IIS Manager](https://github.com/user-attachments/assets/ab4c2c1d-dea3-4339-9124-1e4b029d0feb)
+
+<p align="center">
+Next go to PHP Manager> Register new PHP version and then select the file shown:  
+
+![15-Register new php version](https://github.com/user-attachments/assets/b88920c0-c46e-431d-94a5-6007b99416ab)
+
+<p align="center">
+Next I'll download osTicket and copy the upload file to the wwwroot file in the inetpub directory:
+
+![18- Copy folder into root](https://github.com/user-attachments/assets/216fee10-3849-4136-a5b7-32658c483f03)
+
+<p align="center">
+Rename upload file to osTicket:  
+
+
+![19-Renaming the file](https://github.com/user-attachments/assets/cfeaa177-705a-43ae-8c4a-4f2e4846cbf1)
+
+<p align="center">
+Reload IIS and restart the server then click Browse *80 (http) on the right side and this page should open: 
+
+![20-Browsing osTicket Site](https://github.com/user-attachments/assets/989bde8a-0484-4c8c-aaed-7de1707783e6)
+
+<p align="center">
+Notice some extensions are not enabled. I'll enable a few of those in IIS. Go to Sites> Default Web Site> osTicket Click PHP Manager> Enable or disable an extension. Enable php_imap.dll, php_intl.dll, and php_opcache.dll: 
+
+![22- Enable these extensions](https://github.com/user-attachments/assets/83a72f20-4b34-4a7b-aa03-c35feac4e9cb)
+
+<p align="center">
+Next browse in file explorer to C drive> osTicket> include> ost-sampleconfig.php and remove the "sample" from the name:  
+
+![23- Rename OST config](https://github.com/user-attachments/assets/b4d7bbaa-17a5-4be1-b070-3ebeb9e3a1f6)
+
+<p align="center">
+Right-click on ost-config.php> Properties> Security> Advanced> Disable Inheritance> Remove all inherited permissions from this object.
+Click on the add buton to add permissions to the file> Select a principle> type "everyone"> Check> OK> check all permissions> OK> apply> OK:  
+
+![24- Assign permissions for all](https://github.com/user-attachments/assets/263de237-d32a-4acc-8b2c-8ae1b9585e23)
+
+<p align="center">
+Hit continue on the osTicket web page in the browser and fill out the set up page: 
+
+![24-osTicket Basic installation info](https://github.com/user-attachments/assets/0fa7cd85-4203-4bab-bd7b-c46e833efb02)
+
+<p align="center">
+Before database set up we'll have to connect the database using HeidiSQL. Install HeidiSQL from setup links: 
+
+![25-Install Heidi SQL](https://github.com/user-attachments/assets/a914134e-889b-4575-9317-ad00f310576a)
+
+<p align="center">
+In HeidiSQL right click Unnamed> Create> New Database> Name it osTicket> OK. 
+
+![26-Create a new SQL database](https://github.com/user-attachments/assets/d9e678b5-f486-4717-8d0f-59f551de415d)
+
+<p align="center">
+Then continue to fill out the database portion of osTicket setup. Click Install Now when done.:  <br/>
+
+![27-osTicket is installed](https://github.com/user-attachments/assets/c77f4c32-3b16-4b56-8b99-2de91b6965d8)
+
+
+
 <h2>osTicket Installed!</h2>
 
 <b>osTicket is now installed and ready for use! In the next project I will walk you through how to configure agents, their permissions and access, users, and more!  </b>
